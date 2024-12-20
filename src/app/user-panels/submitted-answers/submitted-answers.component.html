@@ -1,0 +1,40 @@
+<div class="mb-40 mt-10">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-8 text-title-light dark:text-title-dark">
+      Submitted Responses
+    </h2>
+
+    <div *ngFor="let response of responses; let i = index" class="mb-4">
+      <!-- Question Section -->
+      <div
+        class="p-4 panel rounded-md shadow-md flex items-center justify-between gap-4 overflow-hidden"
+      >
+        <h2
+          class="text-xl text-body-light dark:text-body-dark break-words flex-grow"
+        >
+          {{ response.question }}
+        </h2>
+
+        <!-- Accordion Icon for Toggle -->
+        <button
+          (click)="toggleAnswer(i)"
+          class="w-8 h-8 flex items-center justify-center bg-body-black dark:bg-body-white rounded-full shadow-md transform transition-transform hover:scale-110 flex-shrink-0"
+          aria-label="Toggle Answer"
+        >
+          <span
+            [ngClass]="{'rotate-45': response.showAnswer}"
+            class="relative block w-4 h-1 bg-icon-white dark:bg-icon-black before:absolute before:w-4 before:h-1 before:bg-icon-light dark:before:bg-icon-dark transition-transform"
+          ></span>
+        </button>
+      </div>
+
+      <!-- Answer Section -->
+      <div
+        *ngIf="response.showAnswer"
+        class="mt-4 p-4 panel text-body-light dark:text-body-dark rounded-md shadow-md"
+      >
+        <p class="text-lg break-words">{{ response.response }}</p>
+      </div>
+    </div>
+  </div>
+</div>

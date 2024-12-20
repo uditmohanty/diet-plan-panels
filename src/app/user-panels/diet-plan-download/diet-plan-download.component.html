@@ -1,0 +1,108 @@
+<div class="flex flex-col">
+    <!-- Download Buttons -->
+    <div class="mb-6 flex flex-wrap items-center justify-center gap-4 lg:justify-end" *ngFor="let document of documents; let i = index">
+        <button type="button" class="btn btn-success gap-2 lg:w-40 w-[130px]" (click)="downloadDocument(document.path)">
+            <icon-download></icon-download>
+            Week {{ i + 1 }}
+        </button>
+    </div>
+
+    <!-- Subscribed Plan Details -->
+    <div id="plan-details" class="panel">
+        <div class="flex justify-between items-center">
+            <div class="text-3xl font-semibold uppercase">Diet Plan</div>
+            <div class="shrink-0">
+                <img src="/assets/images/logo.svg" alt="Logo" class="w-14 sm:w-16 lg:w-20" />
+            </div>
+        </div>
+
+        <div class="px-4 ltr:text-right rtl:text-left">
+            <div class="mt-6 space-y-1 text-white-dark">
+                <div>Company Address, City, Country, ZIP</div>
+                <div>{{ 'support@company.com' }}</div>
+                <div>+1 (123) 456-7890</div>
+            </div>
+        </div>
+
+        <hr class="my-6 border-border-light dark:border-border-dark" />
+
+        <div class="flex flex-col lg:flex-row p-6 gap-8 panel">
+            <!-- Left Section: Plan Details -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-2xl font-semibold text-title-light dark:text-title-dark mb-4">Subscription Details</h3>
+                <div class="space-y-2 text-body-light dark:text-body-dark">
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Plan Name:</span>
+                        {{ subscribedPlan.name }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Description:</span>
+                        {{ subscribedPlan.description }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Price:</span>
+                        ${{ subscribedPlan.price }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Start Date:</span>
+                        {{ subscribedPlan.startDate | date: 'fullDate' }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">End Date:</span>
+                        {{ subscribedPlan.endDate | date: 'fullDate' }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Status:</span>
+                        {{ subscribedPlan.status }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section: User Details -->
+            <div class="w-full lg:w-1/2">
+                <h3 class="text-2xl font-semibold text-title-light dark:text-title-dark mb-4">User Details</h3>
+                <div class="space-y-2 text-body-light dark:text-body-dark">
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Name:</span>
+                        {{ subscribedPlan.user.name }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Email:</span>
+                        {{ subscribedPlan.user.email }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Phone:</span>
+                        {{ subscribedPlan.user.phone }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Mode of Transaction:</span>
+                        {{ subscribedPlan.user.modeOfTransaction }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Address:</span>
+                        {{ subscribedPlan.user.address }}
+                    </div>
+                    <div>
+                        <span class="font-semibold text-title-light dark:text-title-dark">Subscription ID:</span>
+                        {{ subscribedPlan.subscriptionId }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div *ngIf="showPreparingPopup" class="fixed inset-0 flex items-center justify-center z-50 bg-modal-light dark:bg-modal-dark">
+        <div class="panel w-4/5 sm:w-3/4 lg:w-1/3 max-w-sm">
+            <div class="flex flex-col items-center text-center">
+                <span class="text-3xl sm:text-2xl">⏳</span>
+                <h2 class="text-lg sm:text-xl font-semibold mt-4">File In Progress</h2>
+                <p class="text-sm sm:text-base mt-2">Preparing {{ planType }} plan for you. Please wait😉...</p>
+                <button type="button" class="mt-4 btn btn-primary px-4 py-2" (click)="closePopup()">
+                    <icon-thumb-up></icon-thumb-up>
+                    Gotcha
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
